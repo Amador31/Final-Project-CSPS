@@ -1,16 +1,36 @@
-# This is a sample Python script.
+import os
+import random
+import tkinter
+from tkinter import *
+from tkinter import filedialog
+from PIL import Image, ImageTk
+from itertools import count, cycle
+import numpy as np
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+root = Tk()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def UploadAction(event=None):
+  global filename
+  filename = filedialog.askopenfilename()
+  print('Selected:', filename)
+  labelText = filename
+  fileNameLabel.config(text=filename)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+importButton = Button(root, text='Open', command=UploadAction)
+importButton.place(x=0, y=0)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+fileNameLabel = Label(root, text="No File Selected")
+fileNameLabel.place(
+    x=importButton.winfo_width() + 2,
+    y=(importButton.winfo_height() - fileNameLabel.winfo_height()) / 2)
+
+root.update()
+
+fileNameLabel.place(
+    x=importButton.winfo_width() + 2,
+    y=(importButton.winfo_height() - fileNameLabel.winfo_height()) / 2)
+
+root.geometry('%dx%d+%d+%d' % (100, 100, 0, 0))
+root.mainloop()
