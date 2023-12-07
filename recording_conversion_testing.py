@@ -1,7 +1,10 @@
 from scipy.io import wavfile
 import scipy.io
+import os
 
-wav_fname = 'clap.wav'
+script_directory = os.path.dirname(os.path.abspath(__file__))
+wav_fname = os.path.join(script_directory, 'clap.wav')
+
 samplerate, data = wavfile.read(wav_fname)
 print(f"number of channels = {data.shape[len(data.shape) - 1]}")
 print(f"sample rate = {samplerate}Hz")
