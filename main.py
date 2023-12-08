@@ -37,6 +37,12 @@ def UploadAction(event=None):
     fileNameLabel.config(text=filename)
     updateWindow()
 
+def UpdatePicture():
+    print("lowrCheck = " + str(lowrCheck.get()))
+    print("mediCheck = " + str(mediCheck.get()))
+    print("highCheck = " + str(highCheck.get()))
+    imageLabel.config(image=(open('BigLion.png', 'r')))
+
 importButton = Button(root, text='Open', command=UploadAction)
 importButton.place(x=0, y=0)
 
@@ -53,12 +59,19 @@ fileNameLabel.place(x=importButton.winfo_width() + 2, y=textHeight)
 fileInfoLabel = Label(root, text="Time: 0; High Amp: 0; RT60 Dif: 0")
 fileInfoLabel.place(x=2, y=layerHeight+textHeight)
 
+checkLabelLowr = Label(root, text="Low Freq")
+checkLabelLowr.place(anchor=N, relx=.25, y=layerHeight*2+textHeight)
+checkLabelMedi = Label(root, text="Medium Freq")
+checkLabelMedi.place(anchor=N, relx=.50, y=layerHeight*2+textHeight)
+checkLabelHigh = Label(root, text="High Freq")
+checkLabelHigh.place(anchor=N, relx=.75, y=layerHeight*2+textHeight)
+
 lowrCheck = IntVar()
 mediCheck = IntVar()
 highCheck = IntVar()
-lowrC = Checkbutton(root, variable = lowrCheck, onvalue = 1, offvalue = 0)
-mediC = Checkbutton(root, variable = mediCheck, onvalue = 1, offvalue = 0)
-highC = Checkbutton(root, variable = highCheck, onvalue = 1, offvalue = 0)
+lowrC = Checkbutton(root, variable = lowrCheck, onvalue = 1, offvalue = 0, command=UpdatePicture)
+mediC = Checkbutton(root, variable = mediCheck, onvalue = 1, offvalue = 0, command=UpdatePicture)
+highC = Checkbutton(root, variable = highCheck, onvalue = 1, offvalue = 0, command=UpdatePicture)
 lowrC.place(anchor=N, relx=.25, y=layerHeight*3)
 mediC.place(anchor=N, relx=.50, y=layerHeight*3)
 highC.place(anchor=N, relx=.75, y=layerHeight*3)
