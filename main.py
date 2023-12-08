@@ -71,4 +71,6 @@ updateWindow()
 root.resizable(False, False)
 root.mainloop()
 
+# sdajksdgsakdhsajdsa
+
 img_buf.close()
