@@ -50,5 +50,5 @@ def clean_audio_data(file_path):
 
     return cleaned_file_path
 
-input_file_path = '16bit4chan.wav'
+input_file_path = 'clap.mp3'
 cleaned_file_path = clean_audio_data(input_file_path)
