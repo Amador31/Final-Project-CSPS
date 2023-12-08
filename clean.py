@@ -40,6 +40,7 @@ def clean_audio_data(file_path):
     cleaned_file_path = 'cleaned_audio.wav'
     # Rewriting file ensures no meta data
     wavfile.write(cleaned_file_path, samplerate, data)
+    print(f"Cleaning successful. Saved as {cleaned_file_path}")
 
     return cleaned_file_path
 
