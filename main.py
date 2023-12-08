@@ -16,8 +16,17 @@ plt.rcParams["figure.autolayout"] = True
 plt.figure()
 plt.plot([1, 2])
 
-img_buf = io.BytesIO()
-plt.savefig(img_buf, format='png')
+img_buf1 = io.BytesIO()
+plt.savefig(img_buf1, format='png')
+
+plt.rcParams["figure.figsize"] = [7.50, 3.50]
+plt.rcParams["figure.autolayout"] = True
+
+plt.figure()
+plt.plot([3, 1])
+
+img_buf2 = io.BytesIO()
+plt.savefig(img_buf2, format='png')
 
 root = Tk()
 
@@ -41,7 +50,8 @@ def UpdatePicture():
     print("lowrCheck = " + str(lowrCheck.get()))
     print("mediCheck = " + str(mediCheck.get()))
     print("highCheck = " + str(highCheck.get()))
-    imageLabel.config(image=(open('BigLion.png', 'r')))
+    imageLabel.config(image=img2)
+    updateWindow()
 
 importButton = Button(root, text='Open', command=UploadAction)
 importButton.place(x=0, y=0)
@@ -76,14 +86,15 @@ lowrC.place(anchor=N, relx=.25, y=layerHeight*3)
 mediC.place(anchor=N, relx=.50, y=layerHeight*3)
 highC.place(anchor=N, relx=.75, y=layerHeight*3)
 
-img = ImageTk.PhotoImage(Image.open(img_buf))
-imageLabel = Label(root, image = img)
+img1 = ImageTk.PhotoImage(Image.open(img_buf1))
+img2 = ImageTk.PhotoImage(Image.open(img_buf2))
+
+imageLabel = Label(root, image = img1)
 imageLabel.place(x=0, y=layerHeight*4)
 
 updateWindow()
 root.resizable(False, False)
 root.mainloop()
 
-# sdajksdgsakdhsajdsa
-
-img_buf.close()
+img_buf1.close()
+img_buf2.close()
