@@ -4,22 +4,22 @@ from scipy.io import wavfile
 from scipy.signal import spectrogram
 
 # Load the .wav file
-sample_rate, data = wavfile.read("/content/sample_data/New_Recording_68.wav")
+sample_rate, data = wavfile.read("New_Recording_68.wav")
 
 # Compute the spectrogram using FFT
 frequencies, times, spectrum = spectrogram(data, fs=sample_rate, nperseg=1024)
 
 # Select a frequency
-def find_target_frequency(freqs):
+def find_target_frequency(freqs, target):
     for x in freqs:
-        if x > 2500:
+        if x > target:
             break
     return x
 
-def frequency_check():
+def frequency_check(freq_range):
     # Identify a frequency to check
     global target_frequency
-    target_frequency = find_target_frequency(frequencies)
+    target_frequency = find_target_frequency(frequencies, freq_range)
     index_of_frequency = np.where(frequencies == target_frequency)[0][0]
 
     # Find sound data for a particular frequency
@@ -30,8 +30,12 @@ def frequency_check():
 
     return data_in_db_fun
 
+low = 100
+mid = 1000
+high = 10000
+
 # Call the function to get the data in decibels
-data_in_db = frequency_check()
+data_in_db = frequency_check(mid)
 
 # Duration of the file
 duration = len(data) / sample_rate
@@ -39,10 +43,14 @@ duration = len(data) / sample_rate
 # Create time array for x-axis
 time = np.linspace(0., duration, len(data))
 # Create a time array for x-axis
-# t = np.arange(len(data_in_db))
+t = np.arange(len(data_in_db))
+# t = np.arange(duration)
 print(len(data_in_db))
+print(data_in_db)
 print(len(t))
 print(t)
+print(time)
+print(len(time))
 
 # Plot the decibels over time
 plt.figure(2)
@@ -88,5 +96,5 @@ plt.show()
 
 print(f'The RT60 reverb time at freq {int(target_frequency)} Hz is {round(abs(rt60), 2)} seconds')
 
-print(len(time))
+print(len(t))
 print(len(data))
