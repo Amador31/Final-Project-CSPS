@@ -35,7 +35,7 @@ mid = 1000
 high = 10000
 
 # Call the function to get the data in decibels
-data_in_db = frequency_check(mid)
+data_in_db = frequency_check(high)
 
 # Duration of the file
 duration = len(data) / sample_rate
@@ -45,6 +45,8 @@ time = np.linspace(0., duration, len(data))
 # Create a time array for x-axis
 t = np.arange(len(data_in_db))
 # t = np.arange(duration)
+print(duration)
+print(data)
 print(len(data_in_db))
 print(data_in_db)
 print(len(t))
