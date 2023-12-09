@@ -2,6 +2,7 @@ from scipy.io import wavfile
 import numpy as np
 from pydub import AudioSegment
 import os
+import matplotlib as plt
 
 def clean_audio_data(file_path):
     def convert_to_wav(input_file, output_file):
