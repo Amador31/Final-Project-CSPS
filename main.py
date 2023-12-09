@@ -8,9 +8,10 @@ from itertools import count, cycle
 import numpy as np
 from PIL import Image, ImageTk
 import matplotlib.pyplot as plt
-from clean import clean_audio_data
 import scipy
 from pydub import AudioSegment
+
+from clean import clean_audio_data
 
 # Temp Figures
 plt.rcParams["figure.figsize"] = [7.50, 3.50]
@@ -37,18 +38,23 @@ def UpdateWindow():
 def UploadAction(event=None):
     global filename
     filedir = filedialog.askopenfilename()
-    if (filedir.lower().endswith('.wav') or filedir.lower().endswith('.mp3')):
-        global wav
-        wav = clean_audio_data(filedir)
-        print('Selected:', filedir)
-        filename = os.path.basename(filedir).split('/')[-1]
-        fileNameLabel.config(text=filename)
-        UpdatePicture(0)
-        UpdateWindow()
-    else:
-        fileNameLabel.config(text = "Invalid File Format")
-        UpdatePicture(0)
-        UpdateWindow()
+    if 'filedir' in locals():
+        if (filedir.lower().endswith('.wav') or filedir.lower().endswith('.mp3')):
+            global wav
+            wav = clean_audio_data(filedir)
+            print('Selected:', filedir)
+            filename = os.path.basename(filedir).split('/')[-1]
+            fileNameLabel.config(text=filename)
+            UpdatePicture(0)
+            UpdateWindow()
+            # Import Images
+
+            img1 = ImageTk.PhotoImage(Image.open(img_buf1))
+            del filedir
+        else:
+            fileNameLabel.config(text = "Invalid File Format")
+            UpdatePicture(0)
+            UpdateWindow()
 
 # Update Checkbox Pictures
 def UpdatePicture(x):
@@ -57,7 +63,7 @@ def UpdatePicture(x):
             case 0:
                 imageLabel.config(image="", text="Select A Data Visualization Option")
             case 1:
-                imageLabel.config(image="", text="Low Frequencies")
+                imageLabel.config(image=img1, text="")
             case 2:
                 imageLabel.config(image="", text="Medium Frequencies")
             case 3:
@@ -93,9 +99,6 @@ textHeight = (importButton.winfo_height() - fileNameLabel.winfo_height()) / 2
 fileNameLabel.place(x=importButton.winfo_width() + 2, y=textHeight)
 fileInfoLabel = Label(root, text="Time: 0; High Amp: 0; RT60 Dif: 0")
 fileInfoLabel.place(x=2, y=layerHeight+textHeight)
-
-# Import Images
-img1 = ImageTk.PhotoImage(Image.open(img_buf1))
 
 # Graph Display
 imageLabel = Label(root, image = "", text = "No File Given")

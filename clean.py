@@ -4,15 +4,18 @@ from pydub import AudioSegment
 import os
 import matplotlib as plt
 
+
+def convert_to_wav(input_file, output_file):
+    audio = AudioSegment.from_file(input_file)
+
+    # Export the audio as a WAV file
+    audio.export(output_file, format='wav')
+    print(f"Conversion successful. Saved as {output_file}")
+
+    return output_file
+
 def clean_audio_data(file_path):
-    def convert_to_wav(input_file, output_file):
-        audio = AudioSegment.from_file(input_file)
 
-        # Export the audio as a WAV file
-        audio.export(output_file, format='wav')
-        print(f"Conversion successful. Saved as {output_file}")
-
-        return output_file
 
     def convert_to_mono(input_file, output_file):
         audio = AudioSegment.from_file(file_path)
