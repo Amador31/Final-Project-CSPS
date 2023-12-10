@@ -24,7 +24,7 @@ def createWavForm():
   plt.ylabel('Amplitude')
   plt.show()
 
-def plotting(filepath, freq_target_range, printSpec):
+def plotting(filepath, freq_target_range, printSpec, printAll):
 
   sample_rate, data = wavfile.read(filepath)
   spectrum, freqs, t, im = plt.specgram(data, Fs=sample_rate, NFFT=1024, cmap=plt.get_cmap('autumn_r'))
@@ -52,10 +52,32 @@ def plotting(filepath, freq_target_range, printSpec):
     data_in_db_fun = 10 * np.log10(data_for_frequency)
     return data_in_db_fun
 
-  data_in_db = frequency_check()
   plt.figure()
+  if(printAll == True):
+    for i in range(3):
+      freq_target_range = 2800 * (i ** 2) - (1900 * i) + 100
+      data_in_db = frequency_check()
+      match i:
+        case 0:
+          plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#de3163', label='Low')
+        case 1:
+          plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#00aaff', label='Med')
+        case 2:
+          plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#800080', label='High')
+    plt.legend()
+  else:
+    data_in_db = frequency_check()
+    match freq_target_range:
+      case 100:
+        plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#de3163')
+      case 1000:
+        plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#00aaff')
+      case 7500:
+        plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#800080')
+      case _:
+        plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#004bc6')
 
-  plt.plot(t, data_in_db, linewidth=1, alpha=0.7, color='#004bc6')
+
   plt.xlabel('Time (s)')
   plt.ylabel('Power (dB)')
 
@@ -92,7 +114,7 @@ def plotting(filepath, freq_target_range, printSpec):
   rt60 = 3 * rt20
 
   plt.grid()
-  #plt.show()
+  plt.show()
 
   if(printSpec == True):
     plt.clf()
@@ -103,3 +125,5 @@ def plotting(filepath, freq_target_range, printSpec):
   print(f'The RT60 reverb time is {round(abs(rt60), 2)} seconds')
 
   return io.BytesIO()
+
+plotting('New_Recording_68.wav', 1000, False, False)
