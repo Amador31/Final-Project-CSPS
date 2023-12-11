@@ -1,0 +1,18 @@
+[project]
+name = "final_project_package_group17"
+version = "1.0.1"
+authors = [
+    { name="Nicolas Galdona", email="ngaldona4782@floridapoly.edu" },
+    {name = "Garrett Marcum", email = "gmarcum0641@floridapoly.edu"},
+    {name = "Hector Amador", email = "hamador0707@floridapoly.edu"},
+]
+description = "The package for our final project. 1.0.1 version because our initial working version did not have a model.py in one file"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+"Programming Language :: Python :: 3",
+"License :: OSI Approved :: MIT License",
+"Operating System :: OS Independent",
+]
+[project.urls]
+Homepage = "https://github.com/Amador31/Final-Project-CSPS.git"
