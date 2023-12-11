@@ -1,0 +1,8 @@
+pip install:
+
+tkinter
+numpy
+PIL
+matplotlib
+scipy
+pydub
