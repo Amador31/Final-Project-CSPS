@@ -1,6 +1,6 @@
 [project]
 name = "final_project_package_group17"
-version = "1.0.1"
+version = "1.0"
 authors = [
     { name="Nicolas Galdona", email="ngaldona4782@floridapoly.edu" },
     {name = "Garrett Marcum", email = "gmarcum0641@floridapoly.edu"},
