@@ -11,9 +11,8 @@ import matplotlib.pyplot as plt
 import scipy
 from pydub import AudioSegment
 
-from clean import clean_audio_data
-from plots import plotting
-from plots import createWavForm
+from model import Model
+mdl = Model()
 
 root = Tk()
 
@@ -33,7 +32,7 @@ def UploadAction(event=None):
     if 'filedir' in locals():
         if (filedir.lower().endswith('.wav') or filedir.lower().endswith('.mp3')):
             global wav, time
-            wav = clean_audio_data(filedir)
+            wav = mdl.clean_audio_data(filedir)
             print('Selected:', filedir)
             filename = os.path.basename(filedir).split('/')[-1]
             fileNameLabel.config(text=filename)
@@ -44,12 +43,12 @@ def UploadAction(event=None):
             global img1, img2, img3, img4, img5, img6
             global amp1, amp2, amp3, amp4
             global rt60_1, rt60_2, rt60_3, rt60_4
-            img1, rt60_1, amp1 = plotting(wav, 100, False, False)
-            img2, rt60_2, amp2 = plotting(wav, 1000, False, False)
-            img3, rt60_3, amp3 = plotting(wav, 7500, False, False)
-            img4, rt60_4, amp4 = plotting(wav, 1000, False, True)
-            img5, time = createWavForm(wav)
-            img6, rt60_5, amp5 = plotting(wav, 1000, True, False)
+            img1, rt60_1, amp1 = mdl.plotting(wav, 100, False, False)
+            img2, rt60_2, amp2 = mdl.plotting(wav, 1000, False, False)
+            img3, rt60_3, amp3 = mdl.plotting(wav, 7500, False, False)
+            img4, rt60_4, amp4 = mdl.plotting(wav, 1000, False, True)
+            img5, time = mdl.createWavForm(wav)
+            img6, rt60_5, amp5 = mdl.plotting(wav, 1000, True, False)
             del filedir
             fileInfoLabel.config(text="Time: " + str(time) + " seconds; High Amp: N/A; RT60 Dif: N/A")
         else:
