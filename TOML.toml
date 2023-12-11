@@ -6,7 +6,7 @@ authors = [
     {name = "Garrett Marcum", email = "gmarcum0641@floridapoly.edu"},
     {name = "Hector Amador", email = "hamador0707@floridapoly.edu"},
 ]
-description = "The package for our final project. 1.0.1 version because our initial working version did not have a model.py in one file"
+description = "The package for our final project. The program reads audio files and plots their data"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
